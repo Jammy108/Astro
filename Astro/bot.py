@@ -14,7 +14,7 @@ async def run():
 
     # Starts bot
     try:
-        await bot.start('NjUxNzE2NDA4MTc0MDUxMzI4.XmIMDw.z18gC1zzpXLvrJlOwU-6p2DUVLQ')
+        await bot.start(TOKEN)
     except KeyboardInterrupt:
         await db.close()
         await bot.logout()
