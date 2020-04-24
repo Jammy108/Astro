@@ -2,19 +2,26 @@
 import discord
 from discord.ext import commands
 import asyncio
+import utils
 
 
-extensions = []
+extensions = utils.Config.get('extensions')
 
 #Function which starts bot
 async def run():
+
+    #Creates database connection
+    await utils.db.connect()
+
+    #Creates database cache
+    await utils.Cache.create()
 
     # Creates Astro class instance
     bot = Astro()
 
     # Starts bot
     try:
-        await bot.start(TOKEN)
+        await bot.start(utils.Config.get('token'))
     except KeyboardInterrupt:
         await db.close()
         await bot.logout()
@@ -22,7 +29,7 @@ async def run():
 
 # Returns prefix from db cache
 async def get_prefix(bot, message):
-    prefix = 'a?'
+    prefix = utils.Cache.get_prefix(message.guild.id)
     return commands.when_mentioned_or(prefix)(bot, message)
 
 
@@ -30,8 +37,8 @@ async def get_prefix(bot, message):
 class Astro(commands.Bot):
     def __init__(self, **kwargs):
         super().__init__(command_prefix=get_prefix,
-                         description='A minimalist, multifunctional discord bot',
-                         activity=discord.Game(name='In Development'),
+                         description=utils.Config.get('description'),
+                         activity=discord.Game(name=utils.Config.get('activity')),
                          reconnect=True,
                          case_insensitive=True)
 
