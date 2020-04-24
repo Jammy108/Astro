@@ -1,0 +1,25 @@
+#Bot settings
+settings:
+  embed_colour: 0x36393F
+  activity: In development
+  description: A minimalist, multifunction discord bot
+
+
+defaults:
+  default_prefix: a?
+  default_balance: 1000
+
+
+#Cog extensions
+extensions:
+  - developer
+
+
+# Credentials
+credentials:
+  token: TOKEN
+  database:
+    dbUser: USER
+    dbPass: PASS
+    dbName: NAME
+    dbHost: HOST
