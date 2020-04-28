@@ -8,7 +8,7 @@ sorting and editing the bot's
 config.yml file.
 """
 
-class Config(object):
+class Config:
     def __init__(self):
         super(Config, self).__init__()
 
@@ -39,5 +39,5 @@ class Config(object):
 
 
     #Gets value from config (returns None if nothing found)
-    def get(self, value):
-        return self.data.get(value, None)
+    def get(self, value, default=None):
+        return self.data.get(value, default)
