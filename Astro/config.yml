@@ -19,6 +19,8 @@ settings:
     - system
     - settings
     - errors
+    - utility
+
 
   #Cogs that cannot be disabled
   cog-disable-blacklist:
