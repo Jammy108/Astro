@@ -4,6 +4,7 @@ from discord.ext import commands
 import asyncio
 import utils
 
+
 extensions = utils.Config.get('extensions')
 
 #Function which starts bot
@@ -30,7 +31,7 @@ async def get_prefix(bot, message):
         return ''
 
     prefix = utils.Cache.prefixes[message.guild.id]
-    return commands.when_mentioned_or(*prefix)(bot, message)
+    return commands.when_mentioned_or(prefix)(bot, message)
 
 
 
