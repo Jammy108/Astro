@@ -6,7 +6,7 @@ Database class for connecting,
 retrieving and editing data.
 """
 
-class Database(object):
+class Database:
     def __init__(self):
         super(Database, self).__init__()
 
