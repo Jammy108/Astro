@@ -4,15 +4,30 @@ settings:
   activity: In development
   description: A minimalist, multifunction discord bot
 
+  #Defaults
+  defaults:
+    default_prefix: a?
+    default_balance: 1000
 
-defaults:
-  default_prefix: a?
-  default_balance: 1000
+  #Limits
+  limits:
+    max_prefix_length: 10
 
+  #Cog extensions
+  extensions:
+    - developer
+    - system
+    - settings
+    - errors
 
-#Cog extensions
-extensions:
-  - developer
+  #Cogs that cannot be disabled
+  cog-disable-blacklist:
+    - settings
+
+  #Commands that cannot be disabled
+  command-disable-blacklist:
+    - module
+    - command
 
 
 # Credentials
