@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from datetime import datetime
 import utils
 
 
@@ -10,22 +9,32 @@ class Developer(commands.Cog):
         self.bot = bot
 
 
+    #Checks if author is bot owner for all cog commands
+    async def cog_check(self, ctx):
+        if not await self.bot.is_owner(ctx.author):
+            raise commands.NotOwner
+        return True
+
+
+
     #Shutsdown bot
-    @commands.is_owner()
-    @commands.command(description="Shutdown the bot")
+    @commands.command()
     async def shutdown(self, ctx):
-        embed = utils.Embed(description='Shutting down')
-        await ctx.send(embed=embed)
+        """
+        Shuts down the bot
+        """
+        await ctx.send(embed=utils.Embed(description='Shutting down'))
         await self.bot.close()
 
 
     #Reloads a cog
-    @commands.is_owner()
-    @commands.command(description="Reload a cog", usage="[cog]")
+    @commands.command(usage="[cog]")
     async def reload(self, ctx, cog: str):
+        """
+        Reload a cog
+        """
         try:
-            self.bot.unload_extension("cogs." + cog)
-            self.bot.load_extension("cogs." + cog)
+            self.bot.reload_extension("cogs." + cog)
         except Exception as e:
             embed = utils.Embed(description=f"Error: {e}")
         else:
@@ -35,10 +44,12 @@ class Developer(commands.Cog):
 
 
 
-    #Reloads a cog
-    @commands.is_owner()
-    @commands.command(description="Load a cog", usage="[cog]")
+    #Loads a cog
+    @commands.command(usage="[cog]")
     async def load(self, ctx, cog: str):
+        """
+        Load a cog
+        """
         try:
             self.bot.load_extension("cogs." + cog)
         except Exception as e:
@@ -50,10 +61,12 @@ class Developer(commands.Cog):
 
 
 
-    #Reloads a cog
-    @commands.is_owner()
-    @commands.command(description="Load a cog", usage="[cog]")
+    #Unloads a cog
+    @commands.command(usage="[cog]")
     async def unload(self, ctx, cog: str):
+        """
+        Unload a cog
+        """
         try:
             self.bot.unload_extension("cogs." + cog)
         except Exception as e:
@@ -62,10 +75,6 @@ class Developer(commands.Cog):
             embed = utils.Embed(description=f"The {cog.capitalize()} cog has been unloaded")
         finally:
             await ctx.send(embed=embed)
-
-
-
-
 
 
 
